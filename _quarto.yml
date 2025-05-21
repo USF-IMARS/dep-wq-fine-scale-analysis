@@ -16,6 +16,9 @@ format:
       - brand
     css: styles.css
     toc: true
+    code-fold: true
+    message: flase
+    warning: false
 
 
 
