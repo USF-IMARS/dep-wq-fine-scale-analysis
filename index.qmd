@@ -1,7 +1,50 @@
 ---
-title: "dep-wq-fine-scale-analysis"
+title: "fkwq-usgs-river-gauges"
+code-fold: true
 ---
 
-This is a Quarto website.
+Water discharge monitoring reports by IMaRS built using quarto.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+# Map of USGS stations used
+
+```{R}
+# Load required libraries
+library(leaflet)
+library(RColorBrewer)
+
+# Load the data
+data <- read.csv("data/Report_stations_table.csv")
+
+# Recode Code → a factor with descriptive labels
+data$Code <- factor(
+  data$Code,
+  levels = c(1, 3, 2),
+  labels = c("precip stations", "river disch stations", "temp/sal buoys")
+)
+
+# Build a color function off that factor
+pal <- colorFactor(
+  palette = "Set1",
+  domain  = data$Code
+)
+
+leaflet(data) %>%
+  addProviderTiles(providers$USGS.USTopo) %>%
+  addCircleMarkers(
+    lng         = ~Lon,
+    lat         = ~Lat,
+    label       = ~ID,                    # Hover shows ID
+    radius      = 5,
+    color       = "black",
+    fillColor   = ~pal(Code),
+    fillOpacity = 1,
+    popup       = ~paste("<b>Station ID:</b>", ID)
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    pal      = pal,
+    values   = ~Code,
+    title    = "Data Type"
+  )
+```
