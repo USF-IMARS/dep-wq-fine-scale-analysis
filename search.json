@@ -9,8 +9,8 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "dep-wq-fine-scale-analysis",
+    "title": "fkwq-usgs-river-gauges",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Water discharge monitoring reports by IMaRS built using quarto.\n\nMap of USGS stations used\n\n\nCode\n# Load required libraries\nlibrary(leaflet)\nlibrary(RColorBrewer)\n\n# Load the data\ndata &lt;- read.csv(\"data/Report_stations_table.csv\")\n\n# Recode Code → a factor with descriptive labels\ndata$Code &lt;- factor(\n  data$Code,\n  levels = c(1, 2, 3),\n  labels = c(\"precipitation\", \"buoy data\", \"discharge\")\n)\n\n# Build a color function off that factor\npal &lt;- colorFactor(\n  palette = \"Set1\",\n  domain  = data$Code\n)\n\nleaflet(data) %&gt;%\n  addProviderTiles(providers$USGS.USTopo) %&gt;%\n  addCircleMarkers(\n    lng         = ~Lon,\n    lat         = ~Lat,\n    label       = ~ID,                    # Hover shows ID\n    radius      = 5,\n    color       = \"black\",\n    fillColor   = ~pal(Code),\n    fillOpacity = 0.7,\n    popup       = ~paste(\"&lt;b&gt;Station ID:&lt;/b&gt;\", ID)\n  ) %&gt;%\n  addLegend(\n    position = \"bottomright\",\n    pal      = pal,\n    values   = ~Code,\n    title    = \"Data Type\"\n  )"
   }
 ]
