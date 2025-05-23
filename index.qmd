@@ -46,5 +46,11 @@ leaflet(data) %>%
     pal      = pal,
     values   = ~Code,
     title    = "Data Type"
-  )
+    leafletSizingPolicy(
+  defaultWidth = "100%",
+  defaultHeight = 400,
+  padding = 0,
+  browser.fill = TRUE,
+)
+)
 ```
