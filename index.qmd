@@ -29,7 +29,10 @@ pal <- colorFactor(
   domain  = data$Code
 )
 
-leaflet(data) %>%
+leaflet(data,
+  options = leafletOptions(zoomControl = TRUE,
+                                 zoomSnap = 0.1,
+                                 zoomDelta = 0.5)) %>%
   addProviderTiles(providers$USGS.USTopo) %>%
   addCircleMarkers(
     lng         = ~Lon,
