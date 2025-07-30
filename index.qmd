@@ -4,7 +4,7 @@ code-fold: true
 ---
 
 Water discharge monitoring reports by IMaRS built using quarto.
-
+ 
 
 # Map of USGS stations used
 
@@ -12,7 +12,7 @@ Water discharge monitoring reports by IMaRS built using quarto.
 # Load required libraries
 library(leaflet)
 library(RColorBrewer)
-
+ 
 # Load the data
 data <- read.csv("data/Report_stations_table.csv")
 
