@@ -17,10 +17,17 @@ library(RColorBrewer)
 data <- read.csv("data/Report_stations_table.csv")
 
 # Recode Code → a factor with descriptive labels
+# data$Code <- factor(
+#  data$Code,
+#  levels = c(1, 3, 2),
+#  labels = c("precip stations", "river disch stations", "temp/sal buoys")
+#)
+
+# Temporary version with only precip stations
 data$Code <- factor(
   data$Code,
-  levels = c(1, 3, 2),
-  labels = c("precip stations", "river disch stations", "temp/sal buoys")
+  levels = c(1),
+  labels = c("precip stations")
 )
 
 # Build a color function off that factor
