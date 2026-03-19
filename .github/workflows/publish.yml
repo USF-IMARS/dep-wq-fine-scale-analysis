@@ -18,7 +18,7 @@ jobs:
           r-version: 'release'
 
       - name: Install system dependencies
-        run: sudo apt-get install -y libpng-dev libgdal-dev libgeos-dev libproj-dev libsqlite3-dev
+        run: sudo apt-get install -y libudunits2-dev libpng-dev libgdal-dev libgeos-dev libproj-dev libsqlite3-dev
 
       - name: Set up renv
         uses: r-lib/actions/setup-renv@v2
